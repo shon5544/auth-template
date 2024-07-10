@@ -1,4 +1,4 @@
-package com.auth.template.auth.application
+package com.auth.template.auth.security.token
 
 class TokenResult(
     val accessToken: String,

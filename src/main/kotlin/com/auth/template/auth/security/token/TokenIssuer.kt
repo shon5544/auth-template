@@ -1,5 +1,6 @@
-package com.auth.template.auth.domain
+package com.auth.template.auth.security.token
 
+import com.auth.template.auth.user.UserRole
 import org.springframework.stereotype.Component
 
 @Component

@@ -1,6 +1,5 @@
-package com.auth.template.auth.application
+package com.auth.template.auth.security.token
 
-import com.auth.template.auth.domain.ClaimExtractor
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.context.SecurityContextHolder

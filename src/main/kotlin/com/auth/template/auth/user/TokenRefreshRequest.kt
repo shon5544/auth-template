@@ -1,4 +1,4 @@
-package com.auth.template.auth.presentation
+package com.auth.template.auth.user
 
 import jakarta.validation.constraints.NotBlank
 

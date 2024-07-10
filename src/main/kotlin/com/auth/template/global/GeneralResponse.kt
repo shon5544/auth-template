@@ -1,8 +1,8 @@
 package com.auth.template.global
 
 class GeneralResponse<T>(
-    private val code: String,
-    private val result: T?,
+    val code: String,
+    val result: T?,
 ) {
     companion object {
         fun <T> of(

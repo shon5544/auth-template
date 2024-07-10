@@ -1,4 +1,4 @@
-package com.auth.template.auth.domain
+package com.auth.template.auth.security.token
 
 class JwtToken(
     val value: String,

@@ -1,7 +1,7 @@
-package com.auth.template.auth.presentation
+package com.auth.template.auth.user
 
-import com.auth.template.auth.application.TokenResult
-import com.auth.template.auth.application.UserAuthService
+import com.auth.template.auth.security.token.TokenResult
+import com.auth.template.auth.support.response.AuthResponseCode
 import com.auth.template.global.GeneralResponse
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody

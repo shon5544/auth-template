@@ -1,4 +1,4 @@
-package com.auth.template.auth.domain
+package com.auth.template.auth.security.token
 
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts

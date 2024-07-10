@@ -1,10 +1,10 @@
-package com.auth.template.auth.application
+package com.auth.template.auth.user
 
-import com.auth.template.auth.domain.TokenIssuer
-import com.auth.template.auth.domain.Tokens
-import com.auth.template.auth.persistence.UserEntity
-import com.auth.template.auth.persistence.UserRepository
-import com.auth.template.auth.support.exception.TokenReIssueException
+import com.auth.template.auth.security.token.TokenIssuer
+import com.auth.template.auth.security.token.TokenResult
+import com.auth.template.auth.security.token.Tokens
+import com.auth.template.auth.support.exception.RefreshTokenNotMatchException
+import com.auth.template.auth.support.exception.UserAlreadyExistException
 import com.auth.template.auth.support.exception.UserNotFoundException
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
@@ -22,6 +22,12 @@ class UserAuthService(
         username: String,
         password: String,
     ): TokenResult {
+        val isExistEmail = userRepository.existsByEmail(email)
+
+        if (isExistEmail) {
+            throw UserAlreadyExistException(action = "회원 가입")
+        }
+
         val encodedPassword: String = passwordEncoder.encode(password)
 
         val tokens: Tokens = tokenIssuer.issueUserTokens(email)
@@ -51,7 +57,7 @@ class UserAuthService(
         val encodedPassword: String = passwordEncoder.encode(password)
 
         val user =
-            userRepository.findByEmailAndPasswordOrNull(email, encodedPassword)
+            userRepository.findByEmailAndPassword(email, encodedPassword)
                 ?: throw UserNotFoundException(action = "로그인")
 
         val tokens: Tokens = tokenIssuer.issueUserTokens(user.email)
@@ -71,7 +77,7 @@ class UserAuthService(
                 ?: throw UserNotFoundException(action = "토큰 재발급")
 
         if (user.refreshToken != refreshToken) {
-            throw TokenReIssueException()
+            throw RefreshTokenNotMatchException(action = "토큰 재발급")
         }
 
         val tokens: Tokens = tokenIssuer.issueUserTokens(user.email)

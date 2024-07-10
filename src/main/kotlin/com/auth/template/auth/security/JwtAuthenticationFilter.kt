@@ -1,7 +1,7 @@
-package com.auth.template.auth.support.security
+package com.auth.template.auth.security
 
-import com.auth.template.auth.application.TokenAuthService
-import com.auth.template.auth.presentation.AuthResponseCode
+import com.auth.template.auth.security.token.TokenAuthService
+import com.auth.template.auth.support.response.AuthResponseCode
 import com.auth.template.global.ErrorResponse
 import com.fasterxml.jackson.databind.ObjectMapper
 import io.jsonwebtoken.ExpiredJwtException

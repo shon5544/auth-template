@@ -1,11 +1,11 @@
-package com.auth.template.auth.persistence
+package com.auth.template.auth.user
 
 import org.springframework.data.jpa.repository.JpaRepository
 
 interface UserRepository : JpaRepository<UserEntity, Long> {
-    fun findByEmailOrNull(email: String): UserEntity?
+    fun existsByEmail(email: String): Boolean
 
-    fun findByEmailAndPasswordOrNull(
+    fun findByEmailAndPassword(
         email: String,
         password: String,
     ): UserEntity?

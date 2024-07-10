@@ -1,6 +1,6 @@
-package com.auth.template.auth.support.security
+package com.auth.template.auth.security
 
-import com.auth.template.auth.application.TokenAuthService
+import com.auth.template.auth.security.token.TokenAuthService
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

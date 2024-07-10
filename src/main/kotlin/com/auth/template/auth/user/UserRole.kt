@@ -1,4 +1,4 @@
-package com.auth.template.auth.domain
+package com.auth.template.auth.user
 
 enum class UserRole {
     ROLE_ADMIN,
