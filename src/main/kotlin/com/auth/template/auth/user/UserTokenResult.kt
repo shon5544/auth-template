@@ -1,6 +1,6 @@
-package com.auth.template.auth.security.token
+package com.auth.template.auth.user
 
-class TokenResult(
+class UserTokenResult(
     val accessToken: String,
     val accessTokenExpiredIn: Long,
     val refreshToken: String,

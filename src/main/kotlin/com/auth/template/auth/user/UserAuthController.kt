@@ -1,6 +1,5 @@
 package com.auth.template.auth.user
 
-import com.auth.template.auth.security.token.TokenResult
 import com.auth.template.auth.support.response.AuthResponseCode
 import com.auth.template.global.GeneralResponse
 import org.springframework.web.bind.annotation.PostMapping
@@ -16,32 +15,32 @@ class UserAuthController(
     @PostMapping("/register")
     fun register(
         @RequestBody request: UserRegisterRequest,
-    ): GeneralResponse<TokenResult> {
-        val tokenResult: TokenResult =
+    ): GeneralResponse<UserTokenResult> {
+        val userTokenResult: UserTokenResult =
             userAuthService.register(
                 request.email,
                 request.username,
                 request.password,
             )
 
-        return GeneralResponse.of(AuthResponseCode.AUTH_00, tokenResult)
+        return GeneralResponse.of(AuthResponseCode.AUTH_00, userTokenResult)
     }
 
     @PostMapping("/login")
     fun login(
         @RequestBody request: UserLoginRequest,
-    ): GeneralResponse<TokenResult> {
-        val tokenResult: TokenResult = userAuthService.login(request.email, request.password)
+    ): GeneralResponse<UserTokenResult> {
+        val userTokenResult: UserTokenResult = userAuthService.login(request.email, request.password)
 
-        return GeneralResponse.of(AuthResponseCode.AUTH_00, tokenResult)
+        return GeneralResponse.of(AuthResponseCode.AUTH_00, userTokenResult)
     }
 
     @PostMapping("/refresh")
     fun refresh(
         @RequestBody request: TokenRefreshRequest,
-    ): GeneralResponse<TokenResult> {
-        val tokenResult: TokenResult = userAuthService.refresh(request.refreshToken)
+    ): GeneralResponse<UserTokenResult> {
+        val userTokenResult: UserTokenResult = userAuthService.refresh(request.refreshToken)
 
-        return GeneralResponse.of(AuthResponseCode.AUTH_00, tokenResult)
+        return GeneralResponse.of(AuthResponseCode.AUTH_00, userTokenResult)
     }
 }

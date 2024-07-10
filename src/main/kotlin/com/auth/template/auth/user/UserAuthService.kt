@@ -1,7 +1,6 @@
 package com.auth.template.auth.user
 
 import com.auth.template.auth.security.token.TokenIssuer
-import com.auth.template.auth.security.token.TokenResult
 import com.auth.template.auth.security.token.Tokens
 import com.auth.template.auth.support.exception.RefreshTokenNotMatchException
 import com.auth.template.auth.support.exception.UserAlreadyExistException
@@ -21,7 +20,7 @@ class UserAuthService(
         email: String,
         username: String,
         password: String,
-    ): TokenResult {
+    ): UserTokenResult {
         val isExistEmail = userRepository.existsByEmail(email)
 
         if (isExistEmail) {
@@ -42,7 +41,7 @@ class UserAuthService(
 
         userRepository.save(toRegister)
 
-        return TokenResult(
+        return UserTokenResult(
             accessToken = tokens.accessToken.value,
             accessTokenExpiredIn = tokens.accessToken.expiredIn,
             refreshToken = tokens.refreshToken.value,
@@ -53,7 +52,7 @@ class UserAuthService(
     fun login(
         email: String,
         password: String,
-    ): TokenResult {
+    ): UserTokenResult {
         val encodedPassword: String = passwordEncoder.encode(password)
 
         val user =
@@ -63,7 +62,7 @@ class UserAuthService(
         val tokens: Tokens = tokenIssuer.issueUserTokens(user.email)
         user.refreshToken = tokens.refreshToken.value
 
-        return TokenResult(
+        return UserTokenResult(
             accessToken = tokens.accessToken.value,
             accessTokenExpiredIn = tokens.accessToken.expiredIn,
             refreshToken = tokens.refreshToken.value,
@@ -71,7 +70,7 @@ class UserAuthService(
         )
     }
 
-    fun refresh(refreshToken: String): TokenResult {
+    fun refresh(refreshToken: String): UserTokenResult {
         val user =
             userRepository.findByRefreshToken(refreshToken)
                 ?: throw UserNotFoundException(action = "토큰 재발급")
@@ -83,7 +82,7 @@ class UserAuthService(
         val tokens: Tokens = tokenIssuer.issueUserTokens(user.email)
         user.refreshToken = refreshToken
 
-        return TokenResult(
+        return UserTokenResult(
             accessToken = tokens.accessToken.value,
             accessTokenExpiredIn = tokens.accessToken.expiredIn,
             refreshToken = tokens.refreshToken.value,
