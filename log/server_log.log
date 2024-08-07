@@ -1,7 +1,0 @@
-2024-07-11T00:46:13.826+09:00  INFO 16871 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2024-07-11T00:46:13.847+09:00 DEBUG 16871 --- [SpringApplicationShutdownHook] org.hibernate.SQL                        : 
-    drop table if exists users
-2024-07-11T00:46:13.858+09:00 TRACE 16871 --- [SpringApplicationShutdownHook] o.h.type.spi.TypeConfiguration$Scope     : Handling #sessionFactoryClosed from [org.hibernate.internal.SessionFactoryImpl@5d373794] for TypeConfiguration
-2024-07-11T00:46:13.858+09:00 DEBUG 16871 --- [SpringApplicationShutdownHook] o.h.type.spi.TypeConfiguration$Scope     : Un-scoping TypeConfiguration [org.hibernate.type.spi.TypeConfiguration$Scope@3826180a] from SessionFactory [org.hibernate.internal.SessionFactoryImpl@5d373794]
-2024-07-11T00:46:13.859+09:00  INFO 16871 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2024-07-11T00:46:13.863+09:00  INFO 16871 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

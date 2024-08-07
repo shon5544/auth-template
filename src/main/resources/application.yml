@@ -26,6 +26,22 @@ spring:
     ansi:
       enabled: always
 
+oauth:
+  naver:
+    client-id: ${NAVER_CLIENT_ID}
+    client-secret: ${NAVER_CLIENT_SECRET}
+  google:
+    client-id: ${GOOGLE_CLIENT_ID}
+    client-secret: ${GOOGLE_CLIENT_SECRET}
+    redirect-uri: ${GOOGLE_REDIRECT_URI}
+  apple:
+    client-id: ${APPLE_CLIENT_ID}
+    key-id: ${APPLE_KEY_ID}
+    team-id: ${APPLE_TEAM_ID}
+    audience: ${APPLE_AUDIENCE}
+    private-key: ${APPLE_PRIVATE_KEY} # (-----BEGIN PRIVATE KEY-----, -----END PRIVATE KEY----- 를 제외한 key 문자열을 띄어쓰기 없이 넣어야 합니다)
+    redirect-uri: ${APPLE_REDIRECT_URI}
+
 logging:
   file:
     name: ${user.dir}/log/server_log.log # slf4j를 사용할 때 생기는 로그 파일 경로
