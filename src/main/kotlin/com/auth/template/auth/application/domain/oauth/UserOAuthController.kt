@@ -1,5 +1,6 @@
 package com.auth.template.auth.application.domain.oauth
 
+import com.auth.template.auth.domain.domain.oauth.apple.AppleOAuthService
 import com.auth.template.auth.domain.domain.oauth.google.GoogleOAuthService
 import com.auth.template.auth.domain.domain.oauth.naver.NaverOAuthService
 import com.auth.template.common.support.response.AuthResponseCode
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController
 class UserOAuthController(
     private val naverOAuthService: NaverOAuthService,
     private val googleOAuthService: GoogleOAuthService,
+    private val appleOAuthService: AppleOAuthService,
 ) {
     @Operation(
         summary = "네이버 로그인",
@@ -55,6 +57,21 @@ class UserOAuthController(
         @RequestParam code: String?,
     ): GeneralResponse<UserTokenResponse> {
         val result = googleOAuthService.auth(code)
+
+        val response = UserTokenResponse.of(result)
+        return GeneralResponse.of(AuthResponseCode.AUTH_00, response)
+    }
+
+    @Operation(
+        summary = "애플 로그인",
+        description = "애플로 로그인합니다.",
+    )
+    @GetMapping("/apple")
+    @ResponseStatus(HttpStatus.OK)
+    fun authApple(
+        @RequestParam code: String?,
+    ): GeneralResponse<UserTokenResponse> {
+        val result = appleOAuthService.auth(code)
 
         val response = UserTokenResponse.of(result)
         return GeneralResponse.of(AuthResponseCode.AUTH_00, response)
